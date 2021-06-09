@@ -1,4 +1,4 @@
-Playing around with WASM in Go.  
+Playing around with Wasm in Go.  
 
 You need:
 * Go 1.16.5 or later  
