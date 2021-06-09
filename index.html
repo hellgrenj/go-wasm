@@ -1,0 +1,22 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="wasm_exec.js"></script>
+    <script>
+        (async () => {
+            const go = new Go();
+            const data = await fetch("http://localhost:5000/main.wasm");
+            const result = await WebAssembly.instantiateStreaming(data, go.importObject);
+            go.run(result.instance);
+            const cities = [{ x: 52.520008, y: 13.404954, label: "Berlin" }, { x: -26.195246, y: 28.034088, label: "Johannes Burg" },
+            { x: 40.730610, y: -73.935242, label: "New york" }, { x: 52.377956, y: 4.897070, label: "Amsterdam" }, { x: -1.286389, y: 36.817223, label: "Nairobi" }]
+            document.getElementById("listOfCities").innerHTML = cities.map(c => c.label).reduce((a,b) => ((a + '<br/>') + b)); 
+            const optimalRoute = route(...cities)
+            document.getElementById("result").textContent = JSON.stringify(optimalRoute, null, 4);
+        })()
+    </script>
+</head>
+<body>
+    Given the following list of cities to visit: <div style="margin-top:5px" id="listOfCities"></div> <br/> the optimal route would be: <pre id="result"></pre>
+</body>
+</html>
