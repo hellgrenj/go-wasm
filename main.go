@@ -21,7 +21,6 @@ func route(this js.Value, inputs []js.Value) interface{} {
 	jsObj := map[string]interface{}{}
 	for _, p := range optimal.Points {
 		jsObj[p.Label] = map[string]interface{}{"x": p.X, "y": p.Y}
-
 	}
 	return js.ValueOf(jsObj)
 }
